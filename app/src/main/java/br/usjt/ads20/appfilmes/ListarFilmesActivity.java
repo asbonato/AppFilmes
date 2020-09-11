@@ -1,6 +1,7 @@
 package br.usjt.ads20.appfilmes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import br.usjt.ads20.appfilmes.model.Dados;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +24,7 @@ public class ListarFilmesActivity extends AppCompatActivity {
         atividade = this;
         Intent intent = getIntent();
         String chave = intent.getStringExtra(MainActivity.NOME);
-        lista = buscaFilmes(chave);
+        lista = Dados.buscaFilmes(chave);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, lista);
         ListView listView = (ListView) findViewById(R.id.listview);
@@ -40,43 +41,5 @@ public class ListarFilmesActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<String> buscaFilmes(String chave){
-        ArrayList<String> lista = geraListaFilmes();
-        if(chave == null || chave.length() == 0){
-            return lista;
-        } else {
-            ArrayList<String> filtro = new ArrayList<>();
-            for(String nome: lista){
-                if(nome.toUpperCase().contains(chave.toUpperCase())){
-                    filtro.add(nome);
-                }
-            }
-            return filtro;
-        }
-    }
-    private ArrayList<String> geraListaFilmes(){
-        ArrayList<String> lista = new ArrayList<>();
-        lista.add("Aventura: Guerra nas Estrelas (1977)");
-        lista.add("Fantasia: O Senhor dos Anéis: O Retorno do Rei");
-        lista.add("Ação: Matrix");
-        lista.add("Aventura: De Volta para o Futuro");
-        lista.add("Ficção Científica: Jornada nas Estrelas");
-        lista.add("Aventura: Os Goonies");
-        lista.add("Ficção Científica: Blade Runner, o Caçador de Androides");
-        lista.add("Suspense: Allien");
-        lista.add("Drama: Platoon");
-        lista.add("Ação: Os Vingadores");
-        lista.add("Thriller: Pulp Fiction");
-        lista.add("Aventura: Os Caçadores da Arca Perdida");
-        lista.add("Terror: It - A coisa");
-        lista.add("Terror: Psicose");
-        lista.add("Comédia: Monty Python em Busca do Cálice Sagrado");
-        lista.add("Terror: Os Garotos Perdidos");
-        lista.add("Suspense: Seven, os Sete Pecados Capitais");
-        lista.add("Ação: Kill Bill");
-        lista.add("Fantasia: Alice no País das Maravilhas");
-        lista.add("Anime: Akira");
-        lista.add("Terror: Hereditário");
-        return lista;
-    }
+
 }
