@@ -7,18 +7,19 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Dados {
-    public static ArrayList<String> buscaFilmes(String chave){
-        ArrayList<String> lista = geraListaFilmes();
+    public static Filme[] buscaFilmes(String chave){
+        ArrayList<Filme> lista = criaFilmes();
         if(chave == null || chave.length() == 0){
-            return lista;
+            return lista.toArray(new Filme[0]);
         } else {
-            ArrayList<String> filtro = new ArrayList<>();
-            for(String nome: lista){
+            ArrayList<Filme> filtro = new ArrayList<>();
+            for(Filme filme: lista){
+                String nome = filme.getTitulo();
                 if(nome.toUpperCase().contains(chave.toUpperCase())){
-                    filtro.add(nome);
+                    filtro.add(filme);
                 }
             }
-            return filtro;
+            return filtro.toArray(new Filme[0]);
         }
     }
     public static ArrayList<String> geraListaFilmes(){
@@ -76,7 +77,7 @@ public class Dados {
     public static ArrayList<Filme> criaFilmes() {
         ArrayList<Filme> lista = new ArrayList<>();
         Filme filme;
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         filme = new Filme();
         filme.setPopularidade(847.503);

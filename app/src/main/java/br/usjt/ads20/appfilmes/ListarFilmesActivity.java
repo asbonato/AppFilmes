@@ -2,6 +2,7 @@ package br.usjt.ads20.appfilmes;
 
 import androidx.appcompat.app.AppCompatActivity;
 import br.usjt.ads20.appfilmes.model.Dados;
+import br.usjt.ads20.appfilmes.model.Filme;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,13 +10,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class ListarFilmesActivity extends AppCompatActivity {
     public static final String DESCRICAO = "br.usjt.ads20.appfilmes.descricao";
-    ArrayList<String> lista;
+    Filme[] lista;
     Activity atividade;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,8 @@ public class ListarFilmesActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String chave = intent.getStringExtra(MainActivity.NOME);
         lista = Dados.buscaFilmes(chave);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, lista);
+        BaseAdapter adapter = new FilmeAdapter(this, lista);
+
         ListView listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
 
@@ -34,7 +36,7 @@ public class ListarFilmesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent1 = new Intent(atividade, DetalheFilmeActivity.class);
-                intent1.putExtra(DESCRICAO, lista.get(i));
+                intent1.putExtra(DESCRICAO, lista[i].getTitulo());
                 startActivity(intent1);
             }
         });
