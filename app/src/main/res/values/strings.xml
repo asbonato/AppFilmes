@@ -2,4 +2,8 @@
     <string name="app_name">AppFilmes</string>
     <string name="busca_filme">Nome do filme</string>
     <string name="botao_busca">Buscar</string>
+    <string name="lbl_genero">Gênero</string>
+    <string name="lbl_direcao">Direção</string>
+    <string name="lbl_popularidade">Popularidade</string>
+    <string name="lbl_lancamento">Lançamento</string>
 </resources>

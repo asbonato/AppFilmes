@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AppPelículas</string>
+    <string name="busca_filme">Título de la película</string>
+    <string name="botao_busca">Búsqueda</string>
+    <string name="lbl_genero">Gênero</string>
+    <string name="lbl_direcao">Director</string>
+    <string name="lbl_popularidade">Popularidad</string>
+    <string name="lbl_lancamento">Estreno</string>
+</resources>

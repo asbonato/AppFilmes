@@ -4,23 +4,28 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Dados {
     public static Filme[] buscaFilmes(String chave){
         ArrayList<Filme> lista = criaFilmes();
+        ArrayList<Filme> filtro;
+        Filme[] filmes;
         if(chave == null || chave.length() == 0){
-            return lista.toArray(new Filme[0]);
+            filtro = lista;
         } else {
-            ArrayList<Filme> filtro = new ArrayList<>();
+            filtro = new ArrayList<>();
             for(Filme filme: lista){
                 String nome = filme.getTitulo();
                 if(nome.toUpperCase().contains(chave.toUpperCase())){
                     filtro.add(filme);
                 }
             }
-            return filtro.toArray(new Filme[0]);
         }
+        filmes = filtro.toArray(new Filme[0]);
+        Arrays.sort(filmes);
+        return filmes;
     }
     public static ArrayList<String> geraListaFilmes(){
         ArrayList<String> lista = new ArrayList<>();

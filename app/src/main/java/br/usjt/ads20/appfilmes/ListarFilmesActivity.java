@@ -16,7 +16,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class ListarFilmesActivity extends AppCompatActivity {
-    public static final String DESCRICAO = "br.usjt.ads20.appfilmes.descricao";
+    public static final String FILME = "br.usjt.ads20.appfilmes.filme";
     Filme[] lista;
     Activity atividade;
     @Override
@@ -36,7 +36,7 @@ public class ListarFilmesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent1 = new Intent(atividade, DetalheFilmeActivity.class);
-                intent1.putExtra(DESCRICAO, lista[i].getTitulo());
+                intent1.putExtra(FILME, lista[i]);
                 startActivity(intent1);
             }
         });

@@ -1,6 +1,8 @@
 package br.usjt.ads20.appfilmes.model;
 
-public class Genero {
+import java.io.Serializable;
+
+public class Genero implements Serializable {
     private int id;
     private String nome;
 

@@ -1,8 +1,9 @@
 package br.usjt.ads20.appfilmes.model;
 
 import java.util.Date;
+import java.io.Serializable;
 
-public class Filme {
+public class Filme implements Serializable, Comparable<Filme>{
     private int id;
     private String titulo;
     private String descricao;
@@ -98,5 +99,10 @@ public class Filme {
                 ", diretor='" + diretor + '\'' +
                 ", genero=" + genero +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Filme filme) {
+        return getTitulo().compareTo(filme.getTitulo());
     }
 }
