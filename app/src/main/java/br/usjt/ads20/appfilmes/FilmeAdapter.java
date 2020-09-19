@@ -2,7 +2,6 @@ package br.usjt.ads20.appfilmes;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +15,18 @@ import java.util.Hashtable;
 import br.usjt.ads20.appfilmes.model.Filme;
 
 public class FilmeAdapter extends BaseAdapter implements SectionIndexer {
-    private Filme[] filmes;
-    private Context context;
-    private Object[] sectionHeaders;
-    private Hashtable<Integer, Integer> positionForSectionMap;
-    private Hashtable<Integer, Integer> sectionForPositionMap;
+    Filme[] filmes;
+    Context context;
+    Object[] sectionHeaders;
+    Hashtable<Integer, Integer> positionForSectionMap;
+    Hashtable<Integer, Integer> sectionForPositionMap;
 
-
-    public FilmeAdapter(Context context, Filme[] filmes) {
+    public FilmeAdapter(Context context, Filme[] filmes){
         this.filmes = filmes;
         this.context = context;
         sectionHeaders = SectionIndexBuilder.buildSectionHeaders(filmes);
         positionForSectionMap = SectionIndexBuilder.buildPositionForSectionMap(filmes);
-        sectionForPositionMap = SectionIndexBuilder.buildSectionForPosition(filmes);
+        sectionForPositionMap = SectionIndexBuilder.buildSectionForPositionMap(filmes);
     }
 
     @Override
@@ -38,7 +36,7 @@ public class FilmeAdapter extends BaseAdapter implements SectionIndexer {
 
     @Override
     public Object getItem(int i) {
-        if(i >=0 && i < filmes.length) {
+        if(i >= 0 && i < filmes.length){
             return filmes[i];
         } else {
             return null;
@@ -52,31 +50,44 @@ public class FilmeAdapter extends BaseAdapter implements SectionIndexer {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
-        if(view == null) {
-            LayoutInflater inflater = (LayoutInflater)
-                    context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (view == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService
+                    (Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.linha_filme, viewGroup, false);
             ImageView posterFilme = (ImageView) view.findViewById(R.id.poster_filme);
             TextView nomeFilme = (TextView) view.findViewById(R.id.nome_filme);
-            TextView detalheFilme = (TextView) view.findViewById(R.id.detalhe_filme);
-            view.setTag(new ViewHolder(posterFilme, nomeFilme, detalheFilme));
+            TextView detalhe1Filme = (TextView) view.findViewById(R.id.detalhe1_filme);
+            TextView detalhe2Filme = (TextView) view.findViewById(R.id.detalhe2_filme);
+            TextView detalhe3Filme = (TextView) view.findViewById(R.id.detalhe3_filme);
+            TextView detalhe4Filme = (TextView) view.findViewById(R.id.detalhe4_filme);
+            ViewHolder viewHolder = new ViewHolder(posterFilme, nomeFilme, detalhe1Filme,
+                    detalhe2Filme, detalhe3Filme, detalhe4Filme);
+            view.setTag(viewHolder);
         }
-        ViewHolder holder = (ViewHolder)view.getTag();
         Drawable drawable = Util.getDrawable(context,
                 filmes[i].getPosterPath().substring(0,
                         filmes[i].getPosterPath().length()-4).toLowerCase());
-        holder.getPosterFilme().setImageDrawable(drawable);
-        holder.getNomeFilme().setText(filmes[i].getTitulo());
-        String direcao = context.getResources().getString(R.string.lbl_direcao);
-        holder.getDetalheFilme().setText(String.format("%s - %s: %s", filmes[i].getGenero().getNome(),
-                direcao, filmes[i].getDiretor()));
+        ViewHolder viewHolder = (ViewHolder)view.getTag();
+        viewHolder.getPosterFilme().setImageDrawable(drawable);
+        viewHolder.getNomeFilme().setText(filmes[i].getTitulo());
+        //Locale locale = new Locale("pt", "BR");
+        String lbl_gen = context.getResources().getString(R.string.lbl_genero);
+        String lbl_dir = context.getResources().getString(R.string.lbl_direcao);
+        String lbl_lanc = context.getResources().getString(R.string.lbl_lancamento);
+        String lbl_pop = context.getResources().getString(R.string.lbl_popularidade);
+        viewHolder.getDetalhe1Filme().setText(String.format("%s: %s", lbl_gen, filmes[i].getGenero().getNome()));
+        viewHolder.getDetalhe2Filme().setText(String.format("%s: %s", lbl_dir, filmes[i].getDiretor()));
+        viewHolder.getDetalhe3Filme().setText(String.format("%s: %td-%tb-%ty", lbl_lanc,
+                filmes[i].getDataLancamento(), filmes[i].getDataLancamento(),
+                filmes[i].getDataLancamento()));
+        viewHolder.getDetalhe4Filme().setText(String.format("%s: %.1f", lbl_pop, filmes[i].getPopularidade()));
 
         return view;
     }
 
     @Override
     public Object[] getSections() {
+        System.out.println(sectionHeaders);
         return sectionHeaders;
     }
 

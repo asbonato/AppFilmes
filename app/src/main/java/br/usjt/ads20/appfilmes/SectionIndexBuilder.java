@@ -42,7 +42,7 @@ public class SectionIndexBuilder {
         return results;
     }
 
-    public static Hashtable<Integer, Integer> buildSectionForPosition(Filme[] filmes) {
+    public static Hashtable<Integer, Integer> buildSectionForPositionMap(Filme[] filmes) {
         Hashtable<Integer, Integer> results = new Hashtable<>();
         TreeSet<String> used = new TreeSet<>();
         int section = -1;
