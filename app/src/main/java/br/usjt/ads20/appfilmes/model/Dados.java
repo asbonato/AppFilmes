@@ -8,8 +8,14 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Dados {
+    private static ArrayList<Filme> filmes;
+
+    public static void setFilmes(ArrayList<Filme> pFilmes){
+        filmes = pFilmes;
+    }
+
     public static Filme[] buscaFilmes(String chave){
-        ArrayList<Filme> lista = criaFilmes();
+        ArrayList<Filme> lista = filmes;
         ArrayList<Filme> filtro;
         Filme[] filmes;
         if(chave == null || chave.length() == 0){

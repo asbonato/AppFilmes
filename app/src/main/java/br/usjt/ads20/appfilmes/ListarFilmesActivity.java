@@ -3,6 +3,7 @@ package br.usjt.ads20.appfilmes;
 import androidx.appcompat.app.AppCompatActivity;
 import br.usjt.ads20.appfilmes.model.Dados;
 import br.usjt.ads20.appfilmes.model.Filme;
+import br.usjt.ads20.appfilmes.model.FilmeNetwork;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ListarFilmesActivity extends AppCompatActivity {
@@ -26,7 +28,11 @@ public class ListarFilmesActivity extends AppCompatActivity {
         atividade = this;
         Intent intent = getIntent();
         String chave = intent.getStringExtra(MainActivity.NOME);
+        ArrayList<Filme> filmes = (ArrayList<Filme>) intent.getSerializableExtra(MainActivity.FILMES);
+        Dados.setFilmes(filmes);
+
         lista = Dados.buscaFilmes(chave);
+
         BaseAdapter adapter = new FilmeAdapter(this, lista);
 
         ListView listView = (ListView) findViewById(R.id.listview);
@@ -42,6 +48,5 @@ public class ListarFilmesActivity extends AppCompatActivity {
         });
 
     }
-
 
 }
