@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kkyxe7hd9mpookorxkmm6suxab" />
+        app:srcCompat="@drawable/noposter" />
 
     <TextView
         android:id="@+id/nome_filme"

@@ -1,6 +1,7 @@
 package br.usjt.ads20.appfilmes.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Genero implements Serializable {
     private int id;
@@ -10,6 +11,8 @@ public class Genero implements Serializable {
         this.id = id;
         this.nome = nome;
     }
+
+    public Genero(){}
 
     public int getId() {
         return id;
@@ -33,5 +36,18 @@ public class Genero implements Serializable {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Genero genero = (Genero) o;
+        return id == genero.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import br.usjt.ads20.appfilmes.model.Dados;
 import br.usjt.ads20.appfilmes.model.Filme;
 import br.usjt.ads20.appfilmes.model.FilmeNetwork;
+import br.usjt.ads20.appfilmes.model.Poster;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class ListarFilmesActivity extends AppCompatActivity {
     public static final String FILME = "br.usjt.ads20.appfilmes.filme";
     Filme[] lista;
+    Poster[] posters;
     Activity atividade;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +35,9 @@ public class ListarFilmesActivity extends AppCompatActivity {
         Dados.setFilmes(filmes);
 
         lista = Dados.buscaFilmes(chave);
+        posters = Dados.buscaPosters(chave);
 
-        BaseAdapter adapter = new FilmeAdapter(this, lista);
+        BaseAdapter adapter = new FilmeAdapter(this, lista, posters);
 
         ListView listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
