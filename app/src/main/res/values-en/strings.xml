@@ -6,7 +6,7 @@
     <string name="lbl_direcao">Director</string>
     <string name="lbl_popularidade">Popularity</string>
     <string name="lbl_lancamento">Release</string>
-    <string name="erro_rede">Problemas con la red.</string>
+    <string name="erro_rede">Problemas con la red. Cargando desde caché.</string>
     <string name="idioma">en</string>
     <string name="pais">US</string>
 </resources>

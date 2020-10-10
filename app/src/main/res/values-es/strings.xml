@@ -6,7 +6,7 @@
     <string name="lbl_direcao">Director</string>
     <string name="lbl_popularidade">Popularidad</string>
     <string name="lbl_lancamento">Estreno</string>
-    <string name="erro_rede">Network problem.</string>
+    <string name="erro_rede">Network problem. Loading from cache.</string>
     <string name="idioma">es</string>
     <string name="pais">ES</string>
 </resources>

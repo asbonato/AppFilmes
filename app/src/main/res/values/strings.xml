@@ -6,7 +6,7 @@
     <string name="lbl_direcao">Direção</string>
     <string name="lbl_popularidade">Popularidade</string>
     <string name="lbl_lancamento">Lançamento</string>
-    <string name="erro_rede">Rede indisponível</string>
+    <string name="erro_rede">Rede indisponível. Carregando do cache.</string>
     <string name="idioma">pt</string>
     <string name="pais">BR</string>
 </resources>

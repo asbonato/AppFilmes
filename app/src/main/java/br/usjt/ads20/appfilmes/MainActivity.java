@@ -3,6 +3,7 @@ package br.usjt.ads20.appfilmes;
 import androidx.appcompat.app.AppCompatActivity;
 import br.usjt.ads20.appfilmes.model.Dados;
 import br.usjt.ads20.appfilmes.model.Filme;
+import br.usjt.ads20.appfilmes.model.FilmeDb;
 import br.usjt.ads20.appfilmes.model.FilmeNetwork;
 import br.usjt.ads20.appfilmes.model.Genero;
 import br.usjt.ads20.appfilmes.model.Poster;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
             String msg = this.getResources().getString(R.string.erro_rede);
             Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
             toast.show();
+            progressBar.setVisibility(View.VISIBLE);
+            new CarregaFilmesDb().execute();
         }
     }
 
@@ -84,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
                     imagens.add(p);
                 }
                 Dados.setImagens(imagens);
+                FilmeDb db = new FilmeDb(context);
+                db.salvarFilmes(filmes);
+                db.atualizaPosters(imagens);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -91,6 +97,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(ArrayList<Filme> filmes){
+            Intent intent = new Intent(context, ListarFilmesActivity.class);
+            String nome = txtNome.getText().toString();
+            intent.putExtra(NOME, nome);
+            intent.putExtra(FILMES, filmes);
+            progressBar.setVisibility(View.INVISIBLE);
+            startActivity(intent);
+        }
+    }
+
+    private class CarregaFilmesDb extends AsyncTask<String, Void, ArrayList<Filme>>{
+
+        @Override
+        protected ArrayList<Filme> doInBackground(String... strings) {
+            FilmeDb db = new FilmeDb(context);
+            ArrayList<Filme> filmes = db.buscarFilmes();
+            ArrayList<Poster> posters = db.buscaPosters();
+            Dados.setImagens(posters);
+
+            return filmes;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Filme> filmes) {
             Intent intent = new Intent(context, ListarFilmesActivity.class);
             String nome = txtNome.getText().toString();
             intent.putExtra(NOME, nome);
